@@ -1,0 +1,62 @@
+IAM -
+
+There are 3 types of IAM identities
+User 
+Group
+Role
+
+There are 2 types of Policies
+1. Identity Based Policies (Doesn't have Principal)
+2. Resource Based Policies (Have Principal)
+
+
+***********************************************
+Identity based policies has below info
+1. Effect - Allow or Deny
+2. Action - List of actions that can be performed on the specified resource below
+3. Resource - The resource which can be accessed with this policy
+4. Condition - 
+
+Role Creation -
+Role has an Identity based policy along with an additional trust policy(The principals listed in the trust policy 
+can assume the role)
+
+Note: Every role has a trust policy which specifies who can assume the role
+
+Trust Policy has below info
+1. Effect - Allow or Deny
+2. Action - sts:AssumeRole
+3. Principal - The service or user who can assume the role
+
+
+
+***********************************************
+Resource Based Policies
+***********************************************
+
+This policy controls access to a particular AWS resource
+
+Resource based policies has below info
+1. Effect - Allow or Deny
+2. Action - List of actions that can be performed on the specified resource below
+3. Resource - The resource which can be accessed with this policy (Ex: All objects in the S3 bucket)
+4. Principal - The list of services or users who can access the resource (Ex: * - publicly accessible) 
+5. Condition -
+
+Sample resource based policy
+
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "VisualEditor0",
+            "Action": "s3:GetObject",
+            "Effect": "Allow",
+            "Resource": "arn:aws:s3:::test-bucket-cl-trishul/*",
+            "Principal": "*"
+        }
+    ]
+}
+
+This resource based policy is attached to the S3 bucket 'test-bucket-cl-trishul'
+It makes all the objects under the bucket(arn:aws:s3:::test-bucket-cl-trishul/*) accessible to everyone(*)
